@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { FlatList } from 'react-native';
 import { FontAwesome } from '@expo/vector-icons';
+import { MaterialIcons } from '@expo/vector-icons';
 
-import { Container, SearchContainer, SearchBar, TrendingMoviesContainer, TrendingMoviesHeaderContainer, TrendingMoviesHeader, HomeContainer} from './styles';
+import { SearchContainer, SearchBar, TrendingMoviesContainer, TrendingMoviesHeaderContainer, TrendingMoviesHeader, HomeContainer} from './styles';
 import MovieItem from '../../shared/MovieItem/MovieItem';
 import ScreenHeader from '../../shared/ScreenHeader/ScreenHeader';
 
@@ -21,11 +22,19 @@ const HomeScreen = () => {
         { id: '7', title: 'Movie 7' },
         { id: '8', title: 'Movie 8' },
         { id: '9', title: 'Movie 9' },
+        { id: '10', title: 'Movie 10' },
+        { id: '11', title: 'Movie 11' },
+        { id: '12', title: 'Movie 12' },
+        { id: '13', title: 'Movie 13' },
+        { id: '14', title: 'Movie 14' },
+        { id: '15', title: 'Movie 15' },
     ];
+
+    const limitedData = dummyTrendingMovies.slice(0, 15);
 
     useEffect(() => {
         // Fetch trending movies data from your API or source
-        setTrendingMovies(dummyTrendingMovies);
+        setTrendingMovies(limitedData);
     }, []);
 
     const renderMovieItem = ({ item }) => (
@@ -34,9 +43,11 @@ const HomeScreen = () => {
 
     return (
         <HomeContainer>
-            <ScreenHeader />
+            <ScreenHeader 
+                rightIcon={<MaterialIcons name="watch-later" size={24} color="#58F5D9" />}
+            />
             <SearchContainer>
-                <FontAwesome name="search" size={24} color="black" />
+                <FontAwesome name="search" size={24} color="#58F5D9" />
                 <SearchBar
                 placeholder="Search for movies..."
                 onChangeText={text => setSearchText(text)}
@@ -51,6 +62,7 @@ const HomeScreen = () => {
                     data={trendingMovies}
                     renderItem={renderMovieItem}
                     keyExtractor={item => item.id}
+                    numColumns={3} // Display in 3 columns
                 />
             </TrendingMoviesContainer>
         </HomeContainer>

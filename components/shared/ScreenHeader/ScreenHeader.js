@@ -1,6 +1,9 @@
 import React from 'react'
 import { HeaderContainer, IconContainer, LeftButton, LogoContainer, RightButton } from './styles'
+import { Ionicons } from '@expo/vector-icons';
 import { MaterialIcons } from '@expo/vector-icons';
+
+import AppLogo from '../../../assets/images/MovieAppIcon.png'
 
 const ScreenHeader = ({ leftIcon, onLeftPress, rightIcon, onRightPress }) => {
     return (
@@ -8,13 +11,12 @@ const ScreenHeader = ({ leftIcon, onLeftPress, rightIcon, onRightPress }) => {
             {
                 leftIcon && <IconContainer setPosition="left">
                     <LeftButton onPress={onLeftPress}>
-                        {leftIcon}
+                        <Ionicons name="chevron-back" size={24} color="#58F5D9" />
                     </LeftButton>
                 </IconContainer>
             }
             <LogoContainer>
-                <MaterialIcons name="local-movies" size={24} color="black" />
-                {/* <Logo source={AppLogo} /> */}
+                <Logo source={AppLogo} />
             </LogoContainer>
             { 
                 rightIcon && <IconContainer setPosition="right">

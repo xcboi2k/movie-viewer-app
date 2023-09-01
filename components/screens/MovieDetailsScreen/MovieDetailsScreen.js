@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { ScrollView, View, Text, Image, FlatList } from 'react-native';
+
+import { DetailsLabel, MovieDetailsContainer, MovieTitle, PosterImage, Ratings, ReviewListContainer, ReviewTitle, Summary } from './styles';
+
+import PosterPlaceHolder from '../../../assets/images/item-pic-placeholder.png'
 import ReviewItem from '../../shared/ReviewItem/ReviewItem';
-import { DetailsLabel, MovieDetailsContainer, MovieTitle, Ratings, ReviewListContainer, ReviewTitle, Summary } from './styles';
 
 const MovieDetailsScreen = ({ route }) => {
     // const { movie } = route.params;
@@ -38,7 +41,7 @@ const MovieDetailsScreen = ({ route }) => {
     return (
         <MovieDetailsContainer>
             <ScrollView>
-                {/* <PosterImage source={{ uri: movie.poster }} /> */}
+                <PosterImage source={PosterPlaceHolder} />
                 <View style={{ padding: 20 }}>
                     <MovieTitle>{dummyMovie.title}</MovieTitle>
                     <Summary>{dummyMovie.summary}</Summary>

@@ -13,20 +13,20 @@ export const SearchContainer = styled.View`
     border: 1px solid #ccc;
     margin-bottom: 16px;
     border-radius: 5px;
-    padding: 10px;    
+    padding: 10px;
+    background-color: '#171D25';
 `;
 
 export const SearchBar = styled.TextInput`
     flex: 1;
     padding-left: 10px; /* Add padding to the left to create space for the icon */
     font-size: 16px;
-    color: #333;
 `;
 
 export const TrendingMoviesHeader = styled.Text`
     font-size: 24px;
     font-weight: bold;
-    color: #333;
+    color: "#58F5D9";
     align-self: flex-start;
 `;
 
