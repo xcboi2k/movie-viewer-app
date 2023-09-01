@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { FlatList } from 'react-native';
 import { FontAwesome } from '@expo/vector-icons';
+import { Ionicons } from '@expo/vector-icons';
 import { MaterialIcons } from '@expo/vector-icons';
 
 import { SearchContainer, SearchBar, TrendingMoviesContainer, TrendingMoviesHeaderContainer, TrendingMoviesHeader, HomeContainer} from './styles';
@@ -44,7 +45,8 @@ const HomeScreen = () => {
     return (
         <HomeContainer>
             <ScreenHeader 
-                rightIcon={<MaterialIcons name="watch-later" size={24} color="#58F5D9" />}
+                leftIcon={<Ionicons name="chevron-back" size={30} color="#58F5D9" />}
+                rightIcon={<MaterialIcons name="watch-later" size={30} color="#58F5D9" />}
             />
             <SearchContainer>
                 <FontAwesome name="search" size={24} color="#58F5D9" />

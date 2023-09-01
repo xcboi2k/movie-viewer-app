@@ -7,6 +7,7 @@ export const HeaderContainer = styled.View`
     height: 70px;
     padding: 16px;
     width: 90%;
+    background-color: '#171D25'
 `;
 
 export const LogoContainer = styled.View`
@@ -16,16 +17,18 @@ export const LogoContainer = styled.View`
 
 export const Logo = styled.Image`
   /* Add your logo styles here */
-    width: 50px;
-    height: 50px;
+    width: 150px;
+    height: 30px;
 `;
 
 export const LeftButton = styled.TouchableOpacity`
     padding: 5px;
+    background-color: yellow;
 `;
 
 export const RightButton = styled.TouchableOpacity`
     padding: 5px;
+    background-color: yellow;
 `;
 
 export const IconContainer = styled.View`

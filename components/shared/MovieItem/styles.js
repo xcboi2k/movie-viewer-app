@@ -2,9 +2,9 @@ import styled from 'styled-components/native';
 
 export const MovieButton = styled.TouchableOpacity`
     background-color: yellow;
-    margin: 10px;
-    width: 90%;
-    height: 50px;
+    margin: 2px;
+    width: 105px;
+    height: 200px;
 `;
 
 export const PosterImage = styled.Image`

@@ -24,9 +24,9 @@ export const SearchBar = styled.TextInput`
 `;
 
 export const TrendingMoviesHeader = styled.Text`
-    font-size: 24px;
+    font-size: 18px;
     font-weight: bold;
-    color: "#58F5D9";
+    color: #58F5D9;
     align-self: flex-start;
 `;
 
@@ -42,6 +42,7 @@ export const TrendingMoviesContainer = styled.View`
     margin-top: 5px;
     margin-bottom: 5px;
     align-items: center;
-    width: 90%;
-    height: 200px;
+    justify-content: center;
+    width: 100%;
+    height: 610px;
 `;

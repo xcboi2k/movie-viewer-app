@@ -1,5 +1,5 @@
 import React from 'react'
-import { HeaderContainer, IconContainer, LeftButton, LogoContainer, RightButton } from './styles'
+import { HeaderContainer, IconContainer, LeftButton, Logo, LogoContainer, RightButton } from './styles'
 import { Ionicons } from '@expo/vector-icons';
 import { MaterialIcons } from '@expo/vector-icons';
 
@@ -11,7 +11,7 @@ const ScreenHeader = ({ leftIcon, onLeftPress, rightIcon, onRightPress }) => {
             {
                 leftIcon && <IconContainer setPosition="left">
                     <LeftButton onPress={onLeftPress}>
-                        <Ionicons name="chevron-back" size={24} color="#58F5D9" />
+                        {rightIcon}
                     </LeftButton>
                 </IconContainer>
             }
