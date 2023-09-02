@@ -30,6 +30,7 @@ export const CustomInputContainer = styled.View`
 
 export const CustomText = styled.Text`
     font-weight: bold;
+    color:  ${({ textColor }) => textColor};
     font-size: ${({ labelTextSize }) => labelTextSize};
     margin-bottom: 5px;
 `;

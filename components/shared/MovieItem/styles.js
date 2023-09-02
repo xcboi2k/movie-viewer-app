@@ -1,7 +1,6 @@
 import styled from 'styled-components/native';
 
 export const MovieButton = styled.TouchableOpacity`
-    background-color: yellow;
     margin: 2px;
     width: 105px;
     height: 200px;

@@ -8,10 +8,11 @@ const TextInput =  ({
     inputProps,
     width = "100%",
     labelTextSize = '20px',
+    color,
 }) => {
     return (
         <CustomInputContainer width={width}>
-            {customLabel && <CustomText labelTextSize={labelTextSize}>{customLabel}</CustomText>}
+            {customLabel && <CustomText labelTextSize={labelTextSize} textColor={color}>{customLabel}</CustomText>}
             <InputContainer>
                 <Input {...inputProps} />
             </InputContainer>

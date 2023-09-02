@@ -1,6 +1,7 @@
 import styled from 'styled-components/native';
+import { Container } from '../../common/Styles';
 
-export const WatchlistContainer = styled.View`
+export const WatchlistContainer = styled(Container)`
     position: relative;
     flex: 1;
     justify-content: flex-start;

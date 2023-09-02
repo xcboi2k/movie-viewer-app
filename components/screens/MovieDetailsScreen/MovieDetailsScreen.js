@@ -1,21 +1,24 @@
 import React, { useState, useEffect } from 'react';
 import { ScrollView, View, Text, Image, FlatList } from 'react-native';
-
+import { FontAwesome } from '@expo/vector-icons';
+import { Ionicons } from '@expo/vector-icons';
+import { MaterialIcons } from '@expo/vector-icons';
 import { DetailsLabel, MovieDetailsContainer, MovieTitle, PosterImage, Ratings, ReviewListContainer, ReviewTitle, Summary } from './styles';
 
 import PosterPlaceHolder from '../../../assets/images/item-pic-placeholder.png'
 import ReviewItem from '../../shared/ReviewItem/ReviewItem';
+import ScreenHeader from '../../shared/ScreenHeader/ScreenHeader';
 
 const MovieDetailsScreen = ({ route }) => {
-    // const { movie } = route.params;
-
-    const dummyMovie = {
-        title: 'Star Wars',
-        summary: 'Lorem ipsum',
-        year: '1999',
-        duration: '1hr 30mins',
-        ratings: '8/10'
-    }
+    const { movie } = route.params;
+    console.log(movie.id)
+    // const dummyMovie = {
+    //     title: 'Star Wars',
+    //     summary: 'Lorem ipsum',
+    //     year: '1999',
+    //     duration: '1hr 30mins',
+    //     ratings: '8/10'
+    // }
 
     const dummyReviews = [
         {
@@ -40,19 +43,20 @@ const MovieDetailsScreen = ({ route }) => {
 
     return (
         <MovieDetailsContainer>
+            <ScreenHeader 
+                leftIcon={<Ionicons name="chevron-back" size={30} color="#58F5D9" />}
+                rightIcon={<MaterialIcons name="watch-later" size={30} color="#58F5D9" />}
+            />
             <ScrollView>
-                <PosterImage source={PosterPlaceHolder} />
+                <PosterImage source={{uri: `https://image.tmdb.org/t/p/w500/${movie.poster_path}`}} />
                 <View style={{ padding: 20 }}>
-                    <MovieTitle>{dummyMovie.title}</MovieTitle>
-                    <Summary>{dummyMovie.summary}</Summary>
+                    <MovieTitle>{movie.title}</MovieTitle>
+                    <Summary>{movie.overview}</Summary>
                     <Text>
-                        <DetailsLabel>Year Released:</DetailsLabel> {dummyMovie.year}
-                    </Text>
-                    <Text>
-                        <DetailsLabel>Duration:</DetailsLabel> {dummyMovie.duration}
+                        <DetailsLabel>Year Released:</DetailsLabel> {movie.year}
                     </Text>
                     <Ratings>
-                        <DetailsLabel>Ratings:</DetailsLabel> {dummyMovie.ratings}
+                        <DetailsLabel>Ratings:</DetailsLabel> {movie.vote_average}
                     </Ratings>
                 </View>
             </ScrollView>

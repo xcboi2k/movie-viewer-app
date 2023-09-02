@@ -1,6 +1,7 @@
 import styled from 'styled-components/native';
+import { Container } from '../../common/Styles';
 
-export const HomeContainer = styled.View`
+export const HomeContainer = styled(Container)`
     position: relative;
     flex: 1;
     justify-content: flex-start;
@@ -21,6 +22,7 @@ export const SearchBar = styled.TextInput`
     flex: 1;
     padding-left: 10px; /* Add padding to the left to create space for the icon */
     font-size: 16px;
+    color: #58F5D9;
 `;
 
 export const TrendingMoviesHeader = styled.Text`
@@ -37,12 +39,11 @@ export const TrendingMoviesHeaderContainer = styled.View`
 `;
 
 export const TrendingMoviesContainer = styled.View`
-    background-color: red;
     flex: 1;
-    margin-top: 5px;
-    margin-bottom: 5px;
     align-items: center;
     justify-content: center;
+    margin-top: 5px;
+    margin-bottom: 5px;
     width: 100%;
     height: 610px;
 `;
