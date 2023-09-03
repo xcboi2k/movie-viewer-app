@@ -4,7 +4,8 @@ import { Container } from '../../common/Styles';
 export const LoginContainer = styled(Container)`
   position: relative;
   flex: 1;
-  justify-content: flex-start;
+  justify-content: center;
+  align-items: center;
   padding-bottom: 20px;
 `;
 

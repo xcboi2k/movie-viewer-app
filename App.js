@@ -10,13 +10,13 @@ import WatchlistScreen from './components/screens/WatchlistScreen/WatchlistScree
 
 export default function App() {
   return (
-    // <MainApp />
-    <View style={styles.container}>
-      {/* <HomeScreen /> */}
-      <LoginScreen />
-      {/* <MovieDetailsScreen /> */}
-      {/* <WatchlistScreen /> */}
-    </View>
+    <MainApp />
+    // <View style={styles.container}>
+    //   {/* <HomeScreen /> */}
+    //   <LoginScreen />
+    //   {/* <MovieDetailsScreen /> */}
+    //   {/* <WatchlistScreen /> */}
+    // </View>
   );
 }
 

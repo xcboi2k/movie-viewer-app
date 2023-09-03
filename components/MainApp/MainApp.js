@@ -11,7 +11,7 @@ import useAuthStore from '../../stores/useAuthStore';
 const Stack = createNativeStackNavigator();
 
 const MainApp = () => {
-    const isLoggedIn = useAuthStore((state) => state.user.isLoggedIn);
+    const isLoggedIn = useAuthStore((state) => state.isAuthenticated);
     return (
         <NavigationContainer>
             {

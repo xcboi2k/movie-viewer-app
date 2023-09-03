@@ -26,8 +26,7 @@ const HomeScreen = () => {
     return (
         <HomeContainer>
             <ScreenHeader 
-                leftIcon={<Ionicons name="chevron-back" size={30} color="#58F5D9" />}
-                rightIcon={<MaterialIcons name="watch-later" size={30} color="#58F5D9" />}
+                onRightPress={() => navigation.navigate('Watchlist')}
             />
             <SearchContainer>
                 <FontAwesome name="search" size={24} color="#58F5D9" />

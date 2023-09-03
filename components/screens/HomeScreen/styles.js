@@ -9,6 +9,7 @@ export const HomeContainer = styled(Container)`
 `;
 
 export const SearchContainer = styled.View`
+    width:90%;
     flex-direction: row;
     align-items: center;
     border: 1px solid #ccc;

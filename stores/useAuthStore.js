@@ -1,32 +1,35 @@
 import { create } from 'zustand';
 
 const authStore = (set, get) => ({
-    user: {
-        username: "",
-        user_id: "",
-        session_id: "",
-        isLoggedIn: false,
-    },
+    user: null, // User object (null if not logged in)
+    isAuthenticated: false, // Authentication status,
+    isLoginSuccess: false,
+    isSessionIDGenerated: false,
+    sessionID: null,
     setUser: (data) => set({ user: data }),
-    loginUser: async(currentUser) => {
-        console.log('loginUser state: ',currentUser)
-
-        const options = {
-            method: 'POST',
-            headers: {
-                accept: 'application/json',
-                'content-type': 'application/json',
-                Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI1ZTJmOTNkODExMGM2MzM1OWY0YjM0MTc3YTc4ZTdlNyIsInN1YiI6IjY0ZjFkYTU5ZGJiYjQyMDExYjcxNDE5ZiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.2flLbwPagHEBs2jaRnvKcNyAOzEXvB1LNA_7OD4pqT8'
-            },
-            body: JSON.stringify({
-                username: currentUser.username,
-                password: currentUser.password,
-                request_token: currentUser.token
-            })
-        };
-        const response = await fetch('https://api.themoviedb.org/3/authentication/token/validate_with_login', options)
-        const res = await response.json();
-        console.log(res);
+    loginUser: async(loginCredentials) => {
+        console.log('loginUser state: ',loginCredentials)
+        try{
+            const options = {
+                method: 'POST',
+                headers: {
+                    accept: 'application/json',
+                    'content-type': 'application/json',
+                    Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI1ZTJmOTNkODExMGM2MzM1OWY0YjM0MTc3YTc4ZTdlNyIsInN1YiI6IjY0ZjFkYTU5ZGJiYjQyMDExYjcxNDE5ZiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.2flLbwPagHEBs2jaRnvKcNyAOzEXvB1LNA_7OD4pqT8'
+                },
+                body: JSON.stringify({
+                    username: loginCredentials.username,
+                    password: loginCredentials.password,
+                    request_token: loginCredentials.token
+                })
+            };
+            const response = await fetch('https://api.themoviedb.org/3/authentication/token/validate_with_login', options)
+            const res = await response.json();
+            set({isLoginSuccess: res.success});
+        }
+        catch(error){
+            console.error('Login Error:', error);
+        }
     },
     getSessionID: async(requestToken) => {
         const options = {
@@ -49,10 +52,11 @@ const authStore = (set, get) => ({
         }
     
         const res = await response.json();
-        const sessionID = (res.session_id)
+        set({
+            isSessionIDGenerated: res.success,
+            sessionID: res.session_id
+        });
         console.log('SESSION_ID:',res.session_id);
-
-        return sessionID
     },
     getUserCredentials: async(sessionID) => {
         const options = {
@@ -80,10 +84,9 @@ const authStore = (set, get) => ({
             user_id: res.id,
             username: res.username,
             session_id: sessionID,
-            isLoggedIn: true,
         }
         set({
-            user: initialData
+            user: initialData, isAuthenticated: true
         });
     }
     

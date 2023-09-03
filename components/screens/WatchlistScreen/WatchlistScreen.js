@@ -1,29 +1,16 @@
 import React, { useState, useEffect } from 'react';
-import { FlatList } from 'react-native';
-import { Container, WatchlistContainer, WatchlistHeader, WatchlistHeaderContainer, WatchlistSection } from './styles';
+import { ActivityIndicator, FlatList } from 'react-native';
+import { WatchlistContainer, WatchlistHeader, WatchlistHeaderContainer, WatchlistSection } from './styles';
 
 import ScreenHeader from '../../shared/ScreenHeader/ScreenHeader';
 import MovieItem from '../../shared/MovieItem/MovieItem';
+import useGetWatchlist from '../../../hooks/useGetWatchlist';
+import useAuthStore from '../../../stores/useAuthStore';
 
-const WatchlistScreen = () => {
-    const [watchlistMovies, setWatchlistMovies] = useState([]);
-    const dummyWatchlistMovies = [
-        { id: '1', title: 'Movie 1' },
-        { id: '2', title: 'Movie 2' },
-        { id: '3', title: 'Movie 3' },
-        { id: '4', title: 'Movie 4' },
-        { id: '5', title: 'Movie 5' },
-        { id: '6', title: 'Movie 6' },
-        { id: '7', title: 'Movie 7' },
-        { id: '8', title: 'Movie 8' },
-        { id: '9', title: 'Movie 9' },
-        // Add more movies here
-    ];
-
-    useEffect(() => {
-        // Fetch trending movies data from your API or source
-        setWatchlistMovies(dummyWatchlistMovies);
-    }, []);
+const WatchlistScreen = ({navigation}) => {
+    const userID = useAuthStore((state) => state.user.user_id)
+    const sessionID = useAuthStore((state) => state.user.session_id)
+    const {movies, loading} = useGetWatchlist({userID: userID, sessionID: sessionID})
 
     const renderMovieItem = ({ item }) => (
         <MovieItem movie={item} onPress={() => handleMoviePress(item)}/>
@@ -31,16 +18,21 @@ const WatchlistScreen = () => {
 
     return (
         <WatchlistContainer>
-            <ScreenHeader/>
+            <ScreenHeader onLeftPress={() => navigation.goBack()}/>
             <WatchlistHeaderContainer>
                 <WatchlistHeader>My Watchlist</WatchlistHeader>
             </WatchlistHeaderContainer>
             <WatchlistSection>
-                <FlatList
-                data={watchlistMovies}
-                renderItem={renderMovieItem}
-                keyExtractor={item => item.id}
-                />
+                {loading ? (
+                    <ActivityIndicator size="large" color="#58F5D9" />
+                ) : (
+                    <FlatList
+                    data={movies}
+                    renderItem={renderMovieItem}
+                    keyExtractor={item => item.id.toString()}
+                    numColumns={3}
+                    />
+                )}
             </WatchlistSection>
         </WatchlistContainer>
     )

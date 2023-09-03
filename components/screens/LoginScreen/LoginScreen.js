@@ -5,10 +5,15 @@ import ButtonText from '../../shared/ButtonText/ButtonText';
 import TextInput from '../../shared/TextInput/TextInput';
 import AppLogo from '../../../assets/images/MovieAppIcon.png'
 import useAuthStore from '../../../stores/useAuthStore';
-import useValidateLogin from '../../../hooks/useValidateLogin';
+import { Alert } from 'react-native';
 
 const LoginScreen = () => {
   const userData = useAuthStore((state) => state.user)
+  const isLoginSuccess = useAuthStore((state) => state.isLoginSuccess)
+  const isSessionIDGenerated = useAuthStore((state) => state.isSessionIDGenerated)
+  const isAuthenticated = useAuthStore((state) => state.isAuthenticated)
+  const sessionID = useAuthStore((state) => state.sessionID)
+
   const loginUser = useAuthStore((state) => state.loginUser);
   const getSessionID = useAuthStore((state) => state.getSessionID);
   const getUserCredentials = useAuthStore((state) => state.getUserCredentials);
@@ -16,6 +21,7 @@ const LoginScreen = () => {
   const [requestToken, setRequestToken] = useState('');
 
   const initialValues = { username: "", password: ""};
+
   useEffect(() => {
     async function getRequestToken() {
       try {
@@ -51,28 +57,31 @@ const LoginScreen = () => {
     if (values.username === "" || values.password === "") {
         Alert.alert("Incomplete Input", "Please fill up the username and password.");
     } else {
-        const validateUser = useValidateLogin(
-          {
+        loginUser({
             username: values.username,
             password: values.password,
             token: requestToken,
+        });
+        if(isLoginSuccess){
+          getSessionID(requestToken);
+          if(isSessionIDGenerated){
+            getUserCredentials(sessionID);
+            if(isAuthenticated){
+              Alert.alert('LOGIN SUCCESSFUL', 'You have successfully logged in your account.')
+            }
+            else{
+              Alert.alert('LOGIN FAILED', 'You have failed to logged in your account.')
+            }
           }
-        )
-        // loginUser({
-        //     username: values.username,
-        //     password: values.password,
-        //     token: requestToken,
-        // });
-
-        if(validateUser){
-          
+          else{
+            console.log('session_id failed to generate')
+          }
+        }
+        else{
+          console.log('Login Unsuccessful')
         }
 
-        const sessionID = getSessionID(requestToken);
-        console.log(sessionID);
-        if(sessionID){
-          getUserCredentials(sessionID);
-        }
+        resetForm();
     };
   };
 

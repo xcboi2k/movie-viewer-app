@@ -9,9 +9,9 @@ const ScreenHeader = ({ leftIcon, onLeftPress, rightIcon, onRightPress }) => {
     return (
         <HeaderContainer>
             {
-                leftIcon && <IconContainer setPosition="left">
+                <IconContainer setPosition="left">
                     <LeftButton onPress={onLeftPress}>
-                        {rightIcon}
+                        <Ionicons name="chevron-back" size={30} color="#58F5D9" />
                     </LeftButton>
                 </IconContainer>
             }
@@ -19,9 +19,9 @@ const ScreenHeader = ({ leftIcon, onLeftPress, rightIcon, onRightPress }) => {
                 <Logo source={AppLogo} />
             </LogoContainer>
             { 
-                rightIcon && <IconContainer setPosition="right">
+                <IconContainer setPosition="right">
                     <RightButton onPress={onRightPress}>
-                        {rightIcon}
+                        <MaterialIcons name="watch-later" size={30} color="#58F5D9" />
                     </RightButton>
                 </IconContainer>
             }
