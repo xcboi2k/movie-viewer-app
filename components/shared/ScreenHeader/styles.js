@@ -7,7 +7,6 @@ export const HeaderContainer = styled.View`
     height: 70px;
     padding: 16px;
     width: 90%;
-    background-color: '#171D25'
 `;
 
 export const LogoContainer = styled.View`

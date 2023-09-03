@@ -1,17 +1,16 @@
 import React from 'react'
 import { HeaderContainer, IconContainer, LeftButton, Logo, LogoContainer, RightButton } from './styles'
-import { Ionicons } from '@expo/vector-icons';
-import { MaterialIcons } from '@expo/vector-icons';
 
 import AppLogo from '../../../assets/images/MovieAppIcon.png'
+import Icons from '../../common/Icons'
 
 const ScreenHeader = ({ leftIcon, onLeftPress, rightIcon, onRightPress }) => {
     return (
         <HeaderContainer>
             {
-                <IconContainer setPosition="left">
+                leftIcon && <IconContainer setPosition="left">
                     <LeftButton onPress={onLeftPress}>
-                        <Ionicons name="chevron-back" size={30} color="#58F5D9" />
+                        <Icons name={leftIcon} color="#58F5D9" size={24}/>
                     </LeftButton>
                 </IconContainer>
             }
@@ -19,9 +18,9 @@ const ScreenHeader = ({ leftIcon, onLeftPress, rightIcon, onRightPress }) => {
                 <Logo source={AppLogo} />
             </LogoContainer>
             { 
-                <IconContainer setPosition="right">
+                rightIcon && <IconContainer setPosition="right">
                     <RightButton onPress={onRightPress}>
-                        <MaterialIcons name="watch-later" size={30} color="#58F5D9" />
+                        <Icons name={rightIcon} color="#58F5D9" size={24}/>
                     </RightButton>
                 </IconContainer>
             }

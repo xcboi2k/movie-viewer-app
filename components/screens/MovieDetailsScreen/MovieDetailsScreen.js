@@ -14,7 +14,7 @@ import useAddWatchlist from '../../../hooks/useAddWatchlist';
 import useAddRating from '../../../hooks/useAddRating';
 import useGetReviews from '../../../hooks/useGetReviews';
 
-const MovieDetailsScreen = ({ route }) => {
+const MovieDetailsScreen = ({ navigation, route }) => {
     const { movie } = route.params;
     const userID = useAuthStore((state) => state.user.user_id)
     console.log(movie.id)
@@ -60,8 +60,8 @@ const MovieDetailsScreen = ({ route }) => {
     return (
         <MovieDetailsContainer>
             <ScreenHeader 
-                leftIcon={<Ionicons name="chevron-back" size={30} color="#58F5D9" />}
-                rightIcon={<MaterialIcons name="watch-later" size={30} color="#58F5D9" />}
+                leftIcon={ICON_NAMES.BACK}
+                onLeftPress={() => navigation.goBack()}
             />
             <MovieContainer>
                 <PosterImage source={{uri: `https://image.tmdb.org/t/p/w500/${movie.poster_path}`}} />

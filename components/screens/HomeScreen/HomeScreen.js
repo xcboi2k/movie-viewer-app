@@ -1,11 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { ActivityIndicator, FlatList, Text } from 'react-native';
-import { FontAwesome } from '@expo/vector-icons';
-import { Ionicons } from '@expo/vector-icons';
-import { MaterialIcons } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
 
 import { SearchContainer, SearchBar, TrendingMoviesContainer, TrendingMoviesHeaderContainer, TrendingMoviesHeader, HomeContainer} from './styles';
+import { ICON_NAMES } from '../../constants/constant';
 import MovieItem from '../../shared/MovieItem/MovieItem';
 import ScreenHeader from '../../shared/ScreenHeader/ScreenHeader';
 
@@ -26,7 +24,9 @@ const HomeScreen = () => {
     return (
         <HomeContainer>
             <ScreenHeader 
-                onRightPress={() => navigation.navigate('Watchlist')}
+                leftIcon={ICON_NAMES.WATCHLIST}
+                rightIcon={ICON_NAMES.RATEDLIST}
+                onLeftPress={() => navigation.navigate('Watchlist')}
             />
             <SearchContainer>
                 <FontAwesome name="search" size={24} color="#58F5D9" />
