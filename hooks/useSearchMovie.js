@@ -46,5 +46,5 @@ export default function useSearchMovie(searchQuery) {
         searchMovies();
     }, [searchQuery]);
     
-        return { searchResults, searchLoading };
+    return { searchResults, searchLoading };
 }

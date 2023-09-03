@@ -5,21 +5,37 @@ import HomeNavigator from '../navigators/HomeNavigator/HomeNavigator';
 import HomeScreen from '../screens/HomeScreen/HomeScreen';
 import MovieDetailsScreen from '../screens/MovieDetailsScreen/MovieDetailsScreen';
 import WatchlistScreen from '../screens/WatchlistScreen/WatchlistScreen';
+import LoginScreen from '../screens/LoginScreen/LoginScreen';
+import useAuthStore from '../../stores/useAuthStore';
 
 const Stack = createNativeStackNavigator();
 
 const MainApp = () => {
+    const isLoggedIn = useAuthStore((state) => state.user.isLoggedIn);
     return (
         <NavigationContainer>
-            <Stack.Navigator initialRouteName="Home"
-            screenOptions={{
-                headerShown: false,
-            }}
-            >
-                <Stack.Screen name="Home" component={HomeScreen} />
-                <Stack.Screen name="MovieDetails" component={MovieDetailsScreen} />
-                <Stack.Screen name="Watchlist" component={WatchlistScreen} />
-            </Stack.Navigator>
+            {
+                isLoggedIn ? (
+                <Stack.Navigator initialRouteName="Home"
+                screenOptions={{
+                    headerShown: false,
+                }}
+                >
+                    <Stack.Screen name="Home" component={HomeScreen} />
+                    <Stack.Screen name="MovieDetails" component={MovieDetailsScreen} />
+                    <Stack.Screen name="Watchlist" component={WatchlistScreen} />
+                </Stack.Navigator>
+                ):(
+                    <Stack.Navigator initialRouteName="Login"
+                    screenOptions={{
+                        headerShown: false,
+                    }}
+                    >
+                        <Stack.Screen name="Login" component={LoginScreen} />
+                    </Stack.Navigator>
+                )
+
+            }
         </NavigationContainer>
     )
 }

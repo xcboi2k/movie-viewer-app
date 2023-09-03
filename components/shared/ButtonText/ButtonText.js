@@ -1,6 +1,5 @@
 import React from 'react'
-import { ButtonContainer } from '../../screens/LoginScreen/styles'
-import { ButtonLabel } from './styles'
+import { ButtonContainer, ButtonLabel } from './styles'
 
 const ButtonText = ({text, onPress, width = "100%", textSize, buttonColor, textColor}) => {
     return (
