@@ -22,12 +22,10 @@ export const Logo = styled.Image`
 
 export const LeftButton = styled.TouchableOpacity`
     padding: 5px;
-    background-color: yellow;
 `;
 
 export const RightButton = styled.TouchableOpacity`
     padding: 5px;
-    background-color: yellow;
 `;
 
 export const IconContainer = styled.View`

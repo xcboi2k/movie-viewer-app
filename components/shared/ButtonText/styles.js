@@ -2,9 +2,9 @@ import styled from "styled-components/native";
 
 export const ButtonContainer = styled.TouchableOpacity`
     width: ${({ width }) => width};
-    padding: 5px;
+    padding: 8px;
     background-color: ${({ buttonColor }) => buttonColor};
-    border-radius: 20px;
+    border-radius: 10px;
     /* flex-direction: row;
     align-items: center; */
 `;

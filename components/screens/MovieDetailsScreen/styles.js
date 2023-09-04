@@ -59,6 +59,8 @@ export const Ratings = styled.Text`
 `;
 
 export const ActivityContainer = styled.View`
+  align-items: center;
+  justify-content: center;
   width: 100%;
 `;
 

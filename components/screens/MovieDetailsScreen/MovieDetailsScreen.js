@@ -1,58 +1,56 @@
 import React, { useState, useEffect } from 'react';
-import { FlatList, ActivityIndicator } from 'react-native';
+import { Alert, FlatList, ActivityIndicator } from 'react-native';
 import { AntDesign } from '@expo/vector-icons';
+
 import { ActivityContainer, ButtonContainer, DetailsLabel, MovieContainer, MovieDetailsContainer, MovieInfoContainer, MovieTitle, MovieTitleContainer, PosterImage, Ratings, RatingsContainer, RatingsDetailsContainer, ReviewListContainer, ReviewTitle, Summary, SummaryContainer, SummaryTitle } from './styles';
+
+import { ICON_NAMES } from '../../constants/constant';
 
 import ReviewItem from '../../shared/ReviewItem/ReviewItem';
 import ScreenHeader from '../../shared/ScreenHeader/ScreenHeader';
 import ButtonText from '../../shared/ButtonText/ButtonText';
-import useAuthStore from '../../../stores/useAuthStore';
-import useAddWatchlist from '../../../hooks/useAddWatchlist';
-import useAddRating from '../../../hooks/useAddRating';
+import RatingFormModal from '../../shared/RatingFormModal/RatingFormModal';
+
 import useGetReviews from '../../../hooks/useGetReviews';
+
+import useAuthStore from '../../../stores/useAuthStore';
+import useWatchlistStore from '../../../stores/useWatchlistStore';
+import useRatingStore from '../../../stores/useRatingStore';
 
 const MovieDetailsScreen = ({ navigation, route }) => {
     const { movie } = route.params;
     const userID = useAuthStore((state) => state.user.user_id)
+    const sessionID = useAuthStore((state) => state.user.session_id)
+    const addWatchlist = useWatchlistStore((state) => state.addWatchlist)
+    const addRating = useRatingStore((state) => state.addRating)
+    const movieID =  movie.id
+
     console.log(movie.id)
     console.log(userID)
 
     const {reviews, loading} = useGetReviews(movie.id)
 
-    const dummyReviews = [
-        {
-        id: 1,
-        author: 'John Doe',
-        text: 'Good.',
-        rating: 8
-        },
-        {
-            id: 2,
-            author: 'Janet Smith',
-            text: 'Not so good.',
-            rating: 5
-        },
-        {
-            id: 3,
-            author: 'Gina Colmert',
-            text: 'Amazing.',
-            rating: 9
-        },
-    ]
+    const [isModalVisible, setIsModalVisible] = useState(false);
 
-    const addToWatchlist = () => {
-        useAddWatchlist({
+    const handleAddWatchlist = () => {
+        addWatchlist({
             userID: userID,
-            movieID: movie.id
+            sessionID: sessionID,
+            movieID: movieID,
         })
     }
 
-    const addRating = () => {
-        useAddRating({
-            userID: userID,
-            ratingValue: value,
+    const handleAddRating = (rating) => {
+        addRating({
+            sessionID: sessionID,
+            movieID: movieID,
+            ratingValue: rating,
         })
     }
+
+    const handleOpenRatingModal = () => {
+        setIsModalVisible(true);
+    };
 
     return (
         <MovieDetailsContainer>
@@ -77,11 +75,11 @@ const MovieDetailsScreen = ({ navigation, route }) => {
                         <ActivityContainer>
                             <ButtonContainer>
                                 <ButtonText text='Add to Watchlist' buttonColor='#58F5D9' textColor='#15191E' width='100%' textSize='16'
-                                onPress={addToWatchlist}
-                                />
+                                onPress={handleAddWatchlist}/>
                             </ButtonContainer>
                             <ButtonContainer>
-                                <ButtonText text='Add Rating' buttonColor='#58F5D9' textColor='#15191E' width='100%' textSize='16'/>
+                                <ButtonText text='Add Rating' buttonColor='#58F5D9' textColor='#15191E' width='100%' textSize='16'
+                                onPress={handleOpenRatingModal}/>
                             </ButtonContainer>
                         </ActivityContainer>
                     </MovieInfoContainer>
@@ -109,6 +107,8 @@ const MovieDetailsScreen = ({ navigation, route }) => {
                 />
                 }
             </ReviewListContainer>
+            <RatingFormModal movieName={movie.title} isVisible={isModalVisible} 
+            onClose={() => setIsModalVisible(false)} onSubmitRating={handleAddRating}/>
         </MovieDetailsContainer>
     )
 }

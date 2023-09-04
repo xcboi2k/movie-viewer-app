@@ -53,7 +53,7 @@ const LoginScreen = () => {
     getRequestToken();
   }, []);
 
-  const handleFormikSubmit = (values) => {
+  const handleFormikSubmit = (values, { resetForm }) => {
     if (values.username === "" || values.password === "") {
         Alert.alert("Incomplete Input", "Please fill up the username and password.");
     } else {

@@ -6,6 +6,8 @@ export default function useGetWatchlist() {
 
     useEffect(() => {
         async function fetchWatchlistMovies({userID, sessionID}) {
+            console.log('SESSION', sessionID)
+            console.log('USER', userID)
             try {
                 const options = {
                 method: 'GET',
@@ -14,7 +16,7 @@ export default function useGetWatchlist() {
                     Authorization: `Bearer ${sessionID}`, // Replace with your access token
                 },
                 };
-                const response = await fetch(`${apiUrl}/account/${userID}/watchlist/movies?language=en-US&page=1&sort_by=created_at.asc`, options);
+                const response = await fetch(`https://api.themoviedb.org/3/account/${userID}/watchlist/movies?language=en-US&page=1&sort_by=created_at.asc`, options);
 
                 if (!response.ok) {
                 throw new Error(`HTTP error! Status: ${response.status}`);

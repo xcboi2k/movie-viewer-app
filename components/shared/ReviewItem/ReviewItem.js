@@ -8,8 +8,8 @@ const ReviewItem = ({ author, text, rating }) => {
       <ReviewInfoContainer>
         <ReviewName>{author}</ReviewName>
           <ReviewRatingContainer>
-            <Ionicons name="md-star" size={13} color="#153A56" />
-            <ReviewRating>{rating}/5</ReviewRating>
+            <Ionicons name="md-star" size={13} color="#58F5D9" />
+            <ReviewRating>{rating}/10</ReviewRating>
           </ReviewRatingContainer>
         </ReviewInfoContainer>
       <ReviewText>{text}</ReviewText>

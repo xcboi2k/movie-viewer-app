@@ -2,25 +2,32 @@ import React, { useState, useEffect } from 'react';
 import { FlatList, ActivityIndicator } from 'react-native';
 import { AntDesign } from '@expo/vector-icons';
 
+import { ActivityContainer, ButtonContainer, DetailsLabel, MovieContainer, MovieInfoContainer, MovieTitle, MovieTitleContainer, PosterImage, RatedMovieDetailsContainer, Ratings, RatingsContainer, RatingsDetailsContainer, ReviewListContainer, ReviewTitle, Summary, SummaryContainer, SummaryTitle } from './styles';
+
 import ReviewItem from '../../shared/ReviewItem/ReviewItem';
 import ScreenHeader from '../../shared/ScreenHeader/ScreenHeader';
 import ButtonText from '../../shared/ButtonText/ButtonText';
-import useAuthStore from '../../../stores/useAuthStore';
+
 import useGetReviews from '../../../hooks/useGetReviews';
-import { ActivityContainer, ButtonContainer, DetailsLabel, MovieContainer, MovieInfoContainer, MovieTitle, MovieTitleContainer, PosterImage, RatedMovieDetailsContainer, Ratings, RatingsContainer, RatingsDetailsContainer, ReviewListContainer, ReviewTitle, Summary, SummaryContainer, SummaryTitle } from './styles';
-import useDeleteRating from '../../../hooks/useDeleteRating';
+
+import useAuthStore from '../../../stores/useAuthStore';
+import useRatingStore from '../../../stores/useRatingStore';
 
 const RatedMoviesDetailsScreen = ({ navigation, route }) => {
   const { movie } = route.params;
   const sessionID = useAuthStore((state) => state.user.session_id)
+  const deleteRating = useRatingStore((state) => state.deleteRating)
+  const movieID = movie.id
   console.log(movie.id)
   console.log(userID)
 
   const {reviews, loading} = useGetReviews(movie.id)
 
-  const deleteRating = () => {
-    const movieID = movie.id
-    useDeleteRating({movieID, sessionID})
+  const handleDeleteRating = () => {
+    deleteRating({
+      sessionID: sessionID,
+      movieID: movieID,
+    })
   }
 
   return (
@@ -46,7 +53,7 @@ const RatedMoviesDetailsScreen = ({ navigation, route }) => {
             <ActivityContainer>
               <ButtonContainer>
               <ButtonText text='Delete Rating' buttonColor='#58F5D9' textColor='#15191E' width='100%' textSize='16'
-              onPress={deleteRating}/>
+              onPress={handleDeleteRating}/>
               </ButtonContainer>
             </ActivityContainer>
           </MovieInfoContainer>

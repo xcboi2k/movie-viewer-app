@@ -3,5 +3,5 @@ export const ICON_NAMES = {
     HOME: "HomeIcon",
     RATEDLIST: "RatedList",
     USER: "UserIcon",
-    WATCHLIST: "RatedList",
+    WATCHLIST: "WatchList",
 }

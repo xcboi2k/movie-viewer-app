@@ -9,9 +9,9 @@ export const RatedMoviesContainer = styled(Container)`
 `;
 
 export const RatedMoviesHeader = styled.Text`
-    font-size: 24px;
+    font-size: 18px;
     font-weight: bold;
-    color: #333;
+    color: #58F5D9;
     align-self: flex-start;
 `;
 

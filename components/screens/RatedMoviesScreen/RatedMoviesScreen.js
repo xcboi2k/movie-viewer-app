@@ -6,6 +6,7 @@ import ScreenHeader from '../../shared/ScreenHeader/ScreenHeader'
 import MovieItem from '../../shared/MovieItem/MovieItem';
 import useAuthStore from '../../../stores/useAuthStore';
 import useGetRatedMovies from '../../../hooks/useGetRatedMovies';
+import { ICON_NAMES } from '../../constants/constant';
 
 const RatedMoviesScreen = ({navigation}) => {
   const userID = useAuthStore((state) => state.user.user_id)
@@ -18,7 +19,9 @@ const RatedMoviesScreen = ({navigation}) => {
 
   return (
     <RatedMoviesContainer>
-      <ScreenHeader onLeftPress={() => navigation.goBack()}/>
+      <ScreenHeader
+      leftIcon={ICON_NAMES.BACK} 
+      onLeftPress={() => navigation.goBack()}/>
       <RatedMoviesHeaderContainer>
         <RatedMoviesHeader>My Rated Movies</RatedMoviesHeader>
       </RatedMoviesHeaderContainer>

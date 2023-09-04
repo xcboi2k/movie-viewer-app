@@ -6,11 +6,14 @@ import ScreenHeader from '../../shared/ScreenHeader/ScreenHeader';
 import MovieItem from '../../shared/MovieItem/MovieItem';
 import useGetWatchlist from '../../../hooks/useGetWatchlist';
 import useAuthStore from '../../../stores/useAuthStore';
+import { ICON_NAMES } from '../../constants/constant';
 
 const WatchlistScreen = ({navigation}) => {
     const userID = useAuthStore((state) => state.user.user_id)
     const sessionID = useAuthStore((state) => state.user.session_id)
-    const {movies, loading} = useGetWatchlist({userID, sessionID})
+    const {movies, loading} = useGetWatchlist({userID: userID, sessionID: sessionID})
+    console.log('SESSION', sessionID)
+    console.log('USER', userID)
 
     const renderMovieItem = ({ item }) => (
         <MovieItem movie={item} onPress={() => handleMoviePress(item)}/>
@@ -18,7 +21,9 @@ const WatchlistScreen = ({navigation}) => {
 
     return (
         <WatchlistContainer>
-            <ScreenHeader onLeftPress={() => navigation.goBack()}/>
+            <ScreenHeader
+            leftIcon={ICON_NAMES.BACK} 
+            onLeftPress={() => navigation.goBack()}/>
             <WatchlistHeaderContainer>
                 <WatchlistHeader>My Watchlist</WatchlistHeader>
             </WatchlistHeaderContainer>
