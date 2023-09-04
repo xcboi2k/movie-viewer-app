@@ -9,19 +9,6 @@ export default function useGetRatedMovies({userID, sessionID}) {
     useEffect(() => {
         async function getRatedMovies() {
             try {
-                // const options = {
-                //     method: 'POST',
-                //     headers: {
-                //         accept: 'application/json',
-                //         'content-type': 'application/json',
-                //         Authorization: `Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI1ZTJmOTNkODExMGM2MzM1OWY0YjM0MTc3YTc4ZTdlNyIsInN1YiI6IjY0ZjFkYTU5ZGJiYjQyMDExYjcxNDE5ZiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.2flLbwPagHEBs2jaRnvKcNyAOzEXvB1LNA_7OD4pqT8`
-                //     },
-                // };
-                // const response = await fetch(`https://api.themoviedb.org/3/account/${userID}/rated/movies?api_key=${apikey}&session_id=${sessionID}?language=en-US&page=1&sort_by=created_at.asc`, options)
-                // const data = await response.json();
-                // console.log(data.results)
-                // setMovies(data.results);
-                // setLoading(false);
                 const options = {
                     method: 'GET',
                     headers: {
