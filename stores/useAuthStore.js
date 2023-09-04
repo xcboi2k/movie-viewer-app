@@ -25,7 +25,7 @@ const authStore = (set, get) => ({
             };
             const response = await fetch('https://api.themoviedb.org/3/authentication/token/validate_with_login', options)
             const res = await response.json();
-            set({isLoginSuccess: res.success});
+            set({isLoginSuccess: true});
         }
         catch(error){
             console.error('Login Error:', error);
@@ -53,12 +53,13 @@ const authStore = (set, get) => ({
     
         const res = await response.json();
         set({
-            isSessionIDGenerated: res.success,
+            isSessionIDGenerated: true,
             sessionID: res.session_id
         });
         console.log('SESSION_ID:',res.session_id);
     },
     getUserCredentials: async(sessionID) => {
+        console.log('user credentials', sessionID)
         const options = {
             method: 'GET',
             headers: {

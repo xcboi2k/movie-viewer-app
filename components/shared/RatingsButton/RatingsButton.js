@@ -6,7 +6,7 @@ import { StarButtonContainer, StarRatingContainer, TitleText } from './styles';
 const RatingsButton = ({ selectedRating, onSelectRating, title }) => {
     const renderStars = () => {
         const stars = [];
-        for (let i = 1; i <= 5; i++) {
+        for (let i = 1; i <= 10; i++) {
             stars.push(
                 <TouchableOpacity
                 key={i}
@@ -15,7 +15,7 @@ const RatingsButton = ({ selectedRating, onSelectRating, title }) => {
                     <Ionicons 
                     key={i} 
                     name={i <= selectedRating ? 'md-star' : 'md-star-outline'}
-                    size={35} 
+                    size={27} 
                     color={i <= selectedRating ? '#FFD700' : 'gray'} 
                     />
                 </TouchableOpacity>
@@ -26,7 +26,7 @@ const RatingsButton = ({ selectedRating, onSelectRating, title }) => {
 
     return (
         <StarRatingContainer>
-            <TitleText>Give {title} a rating.</TitleText>
+            <TitleText>Give "{title}" a rating.</TitleText>
             <StarButtonContainer>
                 {renderStars()}
             </StarButtonContainer>

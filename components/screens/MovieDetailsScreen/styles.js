@@ -9,9 +9,10 @@ export const MovieDetailsContainer = styled(Container)`
 `;
 
 export const PosterImage = styled.Image`
-  width: 170px;
-  height: 300px;
+  width: 55%;
+  height: 250px;
   margin-right: 10px;
+  object-fit: contain;
 `;
 
 export const MovieContainer = styled.View`
@@ -25,7 +26,7 @@ export const MovieTitleContainer = styled.View`
 `
 
 export const MovieTitle = styled.Text`
-  font-size: 30px;
+  font-size: 22px;
   font-weight: bold;
   color: #FFFFFF;
 `;
@@ -71,6 +72,8 @@ export const ButtonContainer = styled.View`
 export const SummaryContainer = styled.ScrollView`
   width: 90%;
   margin-top: 5px;
+  margin-bottom: 5px;
+  height: 100px;
 `;
 
 export const SummaryTitle = styled.Text`
@@ -93,5 +96,5 @@ export const ReviewTitle = styled.Text`
 `;
 
 export const ReviewListContainer = styled.View`
-  height: 180px;
+  height: 250px;
 `;

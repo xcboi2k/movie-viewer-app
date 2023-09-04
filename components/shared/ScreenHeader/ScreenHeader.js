@@ -20,7 +20,7 @@ const ScreenHeader = ({ leftIcon, onLeftPress, rightIcon, onRightPress }) => {
             { 
                 rightIcon && <IconContainer setPosition="right">
                     <RightButton onPress={onRightPress}>
-                        <Icons name={rightIcon} color="#58F5D9" size={24}/>
+                        <Icons name={rightIcon} color="#58F5D9" size={27}/>
                     </RightButton>
                 </IconContainer>
             }

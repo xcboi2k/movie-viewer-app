@@ -12,7 +12,6 @@ const RatedMoviesScreen = ({navigation}) => {
   const userID = useAuthStore((state) => state.user.user_id)
   const sessionID = useAuthStore((state) => state.user.session_id)
   const {movies, loading} = useGetRatedMovies({userID, sessionID})
-
   const renderMovieItem = ({ item }) => (
     <MovieItem movie={item} onPress={() => navigation.navigate('RatedMovieDetails', { movie: item })}/>
   );
