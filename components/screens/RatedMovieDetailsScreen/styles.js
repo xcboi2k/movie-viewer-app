@@ -25,7 +25,7 @@ export const MovieTitleContainer = styled.View`
 `
 
 export const MovieTitle = styled.Text`
-  font-size: 30px;
+  font-size: 22px;
   font-weight: bold;
   color: #FFFFFF;
 `;
@@ -69,6 +69,7 @@ export const ButtonContainer = styled.View`
 export const SummaryContainer = styled.ScrollView`
   width: 90%;
   margin-top: 5px;
+  margin-bottom: 5px;
   height: 100px;
 `;
 

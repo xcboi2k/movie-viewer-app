@@ -72,6 +72,7 @@ export const ButtonContainer = styled.View`
 export const SummaryContainer = styled.ScrollView`
   width: 90%;
   margin-top: 5px;
+  margin-bottom: 5px;
   height: 100px;
 `;
 

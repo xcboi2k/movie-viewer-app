@@ -1,6 +1,6 @@
 import styled from 'styled-components/native';
 
-export const ModalContainer = styled.View`
+export const ModalContainer = styled.TouchableOpacity`
   flex: 1;
   justify-content: center;
   align-items: center;
@@ -14,4 +14,7 @@ export const ModalContent = styled.View`
   width: 300px;
 `;
 
-export const ModalButtonContainer = styled.View``;
+export const ModalButtonContainer = styled.View`
+  justify-content: center;
+  align-items: center;
+`;

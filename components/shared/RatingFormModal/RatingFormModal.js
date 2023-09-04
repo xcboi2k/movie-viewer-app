@@ -17,6 +17,10 @@ const RatingFormModal = ({ movieName, isVisible, onClose, onSubmitRating }) => {
         onClose();
     };
 
+    const handleCloseModal = () => {
+        onClose();
+    };
+
     return (
         <Modal
             transparent={true}
@@ -24,7 +28,7 @@ const RatingFormModal = ({ movieName, isVisible, onClose, onSubmitRating }) => {
             visible={isVisible}
             onRequestClose={onClose}
         >
-            <ModalContainer>
+            <ModalContainer onPress={handleCloseModal}>
                 <ModalContent>
                     <ModalButtonContainer>
                         <RatingsButton selectedRating={selectedRating} onSelectRating={handleSelectRating}

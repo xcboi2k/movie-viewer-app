@@ -28,6 +28,7 @@ const RatedMoviesDetailsScreen = ({ navigation, route }) => {
       sessionID: sessionID,
       movieID: movieID,
     })
+    navigation.navigate('RatedMovies')
   }
 
   const movieDate = movie.release_date
