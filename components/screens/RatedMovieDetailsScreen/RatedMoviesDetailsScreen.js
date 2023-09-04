@@ -12,6 +12,7 @@ import useGetReviews from '../../../hooks/useGetReviews';
 
 import useAuthStore from '../../../stores/useAuthStore';
 import useRatingStore from '../../../stores/useRatingStore';
+import { ICON_NAMES } from '../../constants/constant';
 
 const RatedMoviesDetailsScreen = ({ navigation, route }) => {
   const { movie } = route.params;
@@ -19,7 +20,6 @@ const RatedMoviesDetailsScreen = ({ navigation, route }) => {
   const deleteRating = useRatingStore((state) => state.deleteRating)
   const movieID = movie.id
   console.log(movie.id)
-  console.log(userID)
 
   const {reviews, loading} = useGetReviews(movie.id)
 
@@ -30,6 +30,9 @@ const RatedMoviesDetailsScreen = ({ navigation, route }) => {
     })
   }
 
+  const movieDate = movie.release_date
+  const year = movieDate.slice(0,4);
+
   return (
     <RatedMovieDetailsContainer>
       <ScreenHeader 
@@ -39,7 +42,7 @@ const RatedMoviesDetailsScreen = ({ navigation, route }) => {
       <MovieContainer>
         <PosterImage source={{uri: `https://image.tmdb.org/t/p/w500/${movie.poster_path}`}}/>
         <MovieTitleContainer>
-          <MovieTitle>{movie.title}</MovieTitle>
+          <MovieTitle>{movie.title} ({year})</MovieTitle>
           <MovieInfoContainer>
             <RatingsContainer>
               <Ratings>Ratings:</Ratings>

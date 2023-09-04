@@ -6,7 +6,7 @@ import { StarButtonContainer, StarRatingContainer, TitleText } from './styles';
 const RatingsButton = ({ selectedRating, onSelectRating, title }) => {
     const renderStars = () => {
         const stars = [];
-        for (let i = 1; i <= 5; i++) {
+        for (let i = 1; i <= 10; i++) {
             stars.push(
                 <TouchableOpacity
                 key={i}

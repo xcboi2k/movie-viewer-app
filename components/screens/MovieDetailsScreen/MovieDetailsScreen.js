@@ -52,6 +52,9 @@ const MovieDetailsScreen = ({ navigation, route }) => {
         setIsModalVisible(true);
     };
 
+    const movieDate = movie.release_date
+    const year = movieDate.slice(0,4);
+
     return (
         <MovieDetailsContainer>
             <ScreenHeader 
@@ -61,7 +64,7 @@ const MovieDetailsScreen = ({ navigation, route }) => {
             <MovieContainer>
                 <PosterImage source={{uri: `https://image.tmdb.org/t/p/w500/${movie.poster_path}`}} />
                 <MovieTitleContainer>
-                    <MovieTitle>{movie.title}</MovieTitle>
+                    <MovieTitle>{movie.title} ({year})</MovieTitle>
                     <MovieInfoContainer>
                         <RatingsContainer>
                             <Ratings>Ratings:</Ratings>

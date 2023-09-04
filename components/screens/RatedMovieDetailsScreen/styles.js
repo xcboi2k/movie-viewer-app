@@ -9,8 +9,8 @@ export const RatedMovieDetailsContainer = styled(Container)`
 `;
 
 export const PosterImage = styled.Image`
-  width: 170px;
-  height: 300px;
+  width: 55%;
+  height: 250px;
   margin-right: 10px;
 `;
 
@@ -69,6 +69,7 @@ export const ButtonContainer = styled.View`
 export const SummaryContainer = styled.ScrollView`
   width: 90%;
   margin-top: 5px;
+  height: 100px;
 `;
 
 export const SummaryTitle = styled.Text`
@@ -91,5 +92,5 @@ export const ReviewTitle = styled.Text`
 `;
 
 export const ReviewListContainer = styled.View`
-  height: 180px;
+  height: 250px;
 `;

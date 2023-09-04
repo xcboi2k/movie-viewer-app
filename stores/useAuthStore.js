@@ -4,8 +4,8 @@ const authStore = (set, get) => ({
     user: null, // User object (null if not logged in)
     isAuthenticated: false, // Authentication status,
     isLoginSuccess: false,
-    // isSessionIDGenerated: false,
-    // sessionID: null,
+    isSessionIDGenerated: false,
+    sessionID: null,
     setUser: (data) => set({ user: data }),
     loginUser: async(loginCredentials) => {
         console.log('loginUser state: ',loginCredentials)
@@ -25,40 +25,41 @@ const authStore = (set, get) => ({
             };
             const response = await fetch('https://api.themoviedb.org/3/authentication/token/validate_with_login', options)
             const res = await response.json();
-            set({isLoginSuccess: res.success});
+            set({isLoginSuccess: true});
         }
         catch(error){
             console.error('Login Error:', error);
         }
     },
-    // getSessionID: async(requestToken) => {
-    //     const options = {
-    //         method: 'POST',
-    //         headers: {
-    //             accept: 'application/json',
-    //             'content-type': 'application/json',
-    //             Authorization: `Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI1ZTJmOTNkODExMGM2MzM1OWY0YjM0MTc3YTc4ZTdlNyIsInN1YiI6IjY0ZjFkYTU5ZGJiYjQyMDExYjcxNDE5ZiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.2flLbwPagHEBs2jaRnvKcNyAOzEXvB1LNA_7OD4pqT8`
-    //         },
-    //         body: JSON.stringify({request_token: requestToken})
-    //     };
+    getSessionID: async(requestToken) => {
+        const options = {
+            method: 'POST',
+            headers: {
+                accept: 'application/json',
+                'content-type': 'application/json',
+                Authorization: `Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI1ZTJmOTNkODExMGM2MzM1OWY0YjM0MTc3YTc4ZTdlNyIsInN1YiI6IjY0ZjFkYTU5ZGJiYjQyMDExYjcxNDE5ZiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.2flLbwPagHEBs2jaRnvKcNyAOzEXvB1LNA_7OD4pqT8`
+            },
+            body: JSON.stringify({request_token: requestToken})
+        };
     
-    //     const response = await fetch(
-    //         `https://api.themoviedb.org/3/authentication/session/new`,
-    //         options
-    //     );
+        const response = await fetch(
+            `https://api.themoviedb.org/3/authentication/session/new`,
+            options
+        );
     
-    //     if (!response.ok) {
-    //         throw new Error(`HTTP error! Status: ${response.status}`);
-    //     }
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
     
-    //     const res = await response.json();
-    //     set({
-    //         isSessionIDGenerated: res.success,
-    //         sessionID: res.session_id
-    //     });
-    //     console.log('SESSION_ID:',res.session_id);
-    // },
+        const res = await response.json();
+        set({
+            isSessionIDGenerated: true,
+            sessionID: res.session_id
+        });
+        console.log('SESSION_ID:',res.session_id);
+    },
     getUserCredentials: async(sessionID) => {
+        console.log('user credentials', sessionID)
         const options = {
             method: 'GET',
             headers: {

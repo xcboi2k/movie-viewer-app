@@ -16,7 +16,7 @@ const WatchlistScreen = ({navigation}) => {
     console.log('USER', userID)
 
     const renderMovieItem = ({ item }) => (
-        <MovieItem movie={item} onPress={() => handleMoviePress(item)}/>
+        <MovieItem movie={item} onPress={() => navigation.navigate('MovieDetails', { movie: item })}/>
     );
 
     return (

@@ -9,14 +9,15 @@ import { Alert } from 'react-native';
 import useGetTokens from '../../../hooks/useGetTokens';
 
 const LoginScreen = () => {
-  const {requestToken, sessionID} = useGetTokens();
+  const requestToken = useGetTokens();
 
-  const userData = useAuthStore((state) => state.user);
   const isLoginSuccess = useAuthStore((state) => state.isLoginSuccess);
-  // const isSessionIDGenerated = useAuthStore((state) => state.isSessionIDGenerated);
   const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
+  const isSessionIDGenerated = useAuthStore((state) => state.isSessionIDGenerated);
+  const sessionID = useAuthStore((state) => state.sessionID);
 
   const loginUser = useAuthStore((state) => state.loginUser);
+  const getSessionID = useAuthStore((state) => state.getSessionID);
   const getUserCredentials = useAuthStore((state) => state.getUserCredentials);
 
   const initialValues = { username: "", password: ""};
@@ -31,22 +32,20 @@ const LoginScreen = () => {
             token: requestToken,
         });
         if(isLoginSuccess){
-          getUserCredentials(sessionID);
+          getSessionID(requestToken);
+          if(isSessionIDGenerated){
+            getUserCredentials(sessionID);
             if(isAuthenticated){
               Alert.alert('LOGIN SUCCESSFUL', 'You have successfully logged in your account.')
               resetForm();
             }
-            else{
-              Alert.alert('LOGIN FAILED', 'You have failed to logged in your account.')
-            }
+          }
         }
         else{
           console.log('Login Unsuccessful')
         }
     };
   };
-
-  console.log(userData);
 
   const formik = useFormik({
     initialValues: initialValues,

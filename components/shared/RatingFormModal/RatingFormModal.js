@@ -26,8 +26,10 @@ const RatingFormModal = ({ movieName, isVisible, onClose, onSubmitRating }) => {
         >
             <ModalContainer>
                 <ModalContent>
-                    <RatingsButton selectedRating={selectedRating} onSelectRating={handleSelectRating}
-                    title={movieName}/>
+                    <ModalButtonContainer>
+                        <RatingsButton selectedRating={selectedRating} onSelectRating={handleSelectRating}
+                        title={movieName}/>
+                    </ModalButtonContainer>
                     <ModalButtonContainer>
                     <ButtonText text='Submit Rating' buttonColor='#58F5D9' textColor='#15191E' width='100%' textSize='16'
                     onPress={handleSubmitRating}/>

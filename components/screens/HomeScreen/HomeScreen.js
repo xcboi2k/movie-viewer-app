@@ -10,6 +10,9 @@ import ScreenHeader from '../../shared/ScreenHeader/ScreenHeader';
 
 import useTrendingMovies from '../../../hooks/useTrendingMovies';
 import useSearchMovie from '../../../hooks/useSearchMovie';
+import useGetWatchlist from '../../../hooks/useGetWatchlist';
+import useGetRatedMovies from '../../../hooks/useGetRatedMovies';
+import useAuthStore from '../../../stores/useAuthStore';
 
 const HomeScreen = () => {
     const navigation = useNavigation();
