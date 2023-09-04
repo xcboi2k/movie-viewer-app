@@ -1,11 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { ScrollView, View, Text, Image, FlatList, ActivityIndicator } from 'react-native';
+import { FlatList, ActivityIndicator } from 'react-native';
 import { AntDesign } from '@expo/vector-icons';
-import { Ionicons } from '@expo/vector-icons';
-import { MaterialIcons } from '@expo/vector-icons';
 import { ActivityContainer, ButtonContainer, DetailsLabel, MovieContainer, MovieDetailsContainer, MovieInfoContainer, MovieTitle, MovieTitleContainer, PosterImage, Ratings, RatingsContainer, RatingsDetailsContainer, ReviewListContainer, ReviewTitle, Summary, SummaryContainer, SummaryTitle } from './styles';
 
-import PosterPlaceHolder from '../../../assets/images/item-pic-placeholder.png'
 import ReviewItem from '../../shared/ReviewItem/ReviewItem';
 import ScreenHeader from '../../shared/ScreenHeader/ScreenHeader';
 import ButtonText from '../../shared/ButtonText/ButtonText';

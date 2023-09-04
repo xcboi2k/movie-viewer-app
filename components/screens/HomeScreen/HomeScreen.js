@@ -27,6 +27,7 @@ const HomeScreen = () => {
                 leftIcon={ICON_NAMES.WATCHLIST}
                 rightIcon={ICON_NAMES.RATEDLIST}
                 onLeftPress={() => navigation.navigate('Watchlist')}
+                onRightPress={() => navigation.navigate('RatedMovies')}
             />
             <SearchContainer>
                 <FontAwesome name="search" size={24} color="#58F5D9" />

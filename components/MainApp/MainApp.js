@@ -7,6 +7,8 @@ import MovieDetailsScreen from '../screens/MovieDetailsScreen/MovieDetailsScreen
 import WatchlistScreen from '../screens/WatchlistScreen/WatchlistScreen';
 import LoginScreen from '../screens/LoginScreen/LoginScreen';
 import useAuthStore from '../../stores/useAuthStore';
+import RatedMoviesScreen from '../screens/RatedMoviesScreen/RatedMoviesScreen';
+import RatedMoviesDetailsScreen from '../screens/RatedMovieDetailsScreen/RatedMoviesDetailsScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -24,6 +26,8 @@ const MainApp = () => {
                     <Stack.Screen name="Home" component={HomeScreen} />
                     <Stack.Screen name="MovieDetails" component={MovieDetailsScreen} />
                     <Stack.Screen name="Watchlist" component={WatchlistScreen} />
+                    <Stack.Screen  name="RatedMovies" component={RatedMoviesScreen} />
+                    <Stack.Screen  name="RatedMovieDetails" component={RatedMoviesDetailsScreen} />
                 </Stack.Navigator>
                 ):(
                     <Stack.Navigator initialRouteName="Login"

@@ -10,7 +10,7 @@ import useAuthStore from '../../../stores/useAuthStore';
 const WatchlistScreen = ({navigation}) => {
     const userID = useAuthStore((state) => state.user.user_id)
     const sessionID = useAuthStore((state) => state.user.session_id)
-    const {movies, loading} = useGetWatchlist({userID: userID, sessionID: sessionID})
+    const {movies, loading} = useGetWatchlist({userID, sessionID})
 
     const renderMovieItem = ({ item }) => (
         <MovieItem movie={item} onPress={() => handleMoviePress(item)}/>
