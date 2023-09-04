@@ -6,52 +6,20 @@ import TextInput from '../../shared/TextInput/TextInput';
 import AppLogo from '../../../assets/images/MovieAppIcon.png'
 import useAuthStore from '../../../stores/useAuthStore';
 import { Alert } from 'react-native';
+import useGetTokens from '../../../hooks/useGetTokens';
 
 const LoginScreen = () => {
-  const userData = useAuthStore((state) => state.user)
-  const isLoginSuccess = useAuthStore((state) => state.isLoginSuccess)
-  const isSessionIDGenerated = useAuthStore((state) => state.isSessionIDGenerated)
-  const isAuthenticated = useAuthStore((state) => state.isAuthenticated)
-  const sessionID = useAuthStore((state) => state.sessionID)
+  const {requestToken, sessionID} = useGetTokens();
+
+  const userData = useAuthStore((state) => state.user);
+  const isLoginSuccess = useAuthStore((state) => state.isLoginSuccess);
+  // const isSessionIDGenerated = useAuthStore((state) => state.isSessionIDGenerated);
+  const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
 
   const loginUser = useAuthStore((state) => state.loginUser);
-  const getSessionID = useAuthStore((state) => state.getSessionID);
   const getUserCredentials = useAuthStore((state) => state.getUserCredentials);
 
-  const [requestToken, setRequestToken] = useState('');
-
   const initialValues = { username: "", password: ""};
-
-  useEffect(() => {
-    async function getRequestToken() {
-      try {
-        const options = {
-          method: 'GET',
-          headers: {
-            accept: 'application/json',
-            Authorization: `Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI1ZTJmOTNkODExMGM2MzM1OWY0YjM0MTc3YTc4ZTdlNyIsInN1YiI6IjY0ZjFkYTU5ZGJiYjQyMDExYjcxNDE5ZiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.2flLbwPagHEBs2jaRnvKcNyAOzEXvB1LNA_7OD4pqT8`
-          }
-        };
-
-        const response = await fetch(
-            `https://api.themoviedb.org/3/authentication/token/new`,
-            options
-        );
-
-        if (!response.ok) {
-          throw new Error(`HTTP error! Status: ${response.status}`);
-        }
-
-        const res = await response.json();
-        console.log('REQUEST_TOKEN:', res.request_token);
-        setRequestToken(res.request_token);
-
-      } catch (error) {
-          console.error('getRequestTokenError:', error);
-      }
-    }
-    getRequestToken();
-  }, []);
 
   const handleFormikSubmit = (values, { resetForm }) => {
     if (values.username === "" || values.password === "") {
@@ -63,25 +31,18 @@ const LoginScreen = () => {
             token: requestToken,
         });
         if(isLoginSuccess){
-          getSessionID(requestToken);
-          if(isSessionIDGenerated){
-            getUserCredentials(sessionID);
+          getUserCredentials(sessionID);
             if(isAuthenticated){
               Alert.alert('LOGIN SUCCESSFUL', 'You have successfully logged in your account.')
+              resetForm();
             }
             else{
               Alert.alert('LOGIN FAILED', 'You have failed to logged in your account.')
             }
-          }
-          else{
-            console.log('session_id failed to generate')
-          }
         }
         else{
           console.log('Login Unsuccessful')
         }
-
-        resetForm();
     };
   };
 
