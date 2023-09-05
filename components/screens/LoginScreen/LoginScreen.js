@@ -1,24 +1,30 @@
 import React, { useState, useEffect } from 'react'
+import { Alert } from 'react-native';
 import { useFormik } from "formik";
-import { ButtonContainer, FormContainer, FormViewContainer, HeaderHolder, LoginButton, LoginButtonText, LoginContainer, LoginInput, LoginTitle, Logo, LogoHolder } from './styles';
+
+import { ButtonContainer, FormContainer, LoginContainer, LoginPrompt, Logo, LogoHolder } from './styles';
+
 import ButtonText from '../../shared/ButtonText/ButtonText';
 import TextInput from '../../shared/TextInput/TextInput';
 import AppLogo from '../../../assets/images/MovieAppIcon.png'
+
 import useAuthStore from '../../../stores/useAuthStore';
-import { Alert } from 'react-native';
 import useGetTokens from '../../../hooks/useGetTokens';
 
 const LoginScreen = () => {
-  const requestToken = useGetTokens();
-
-  const isLoginSuccess = useAuthStore((state) => state.isLoginSuccess);
   const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
+  const isLoginSuccess = useAuthStore((state) => state.isLoginSuccess);
+  const validatedRequestToken = useAuthStore((state) => state.validatedRequestToken);
   const isSessionIDGenerated = useAuthStore((state) => state.isSessionIDGenerated);
   const sessionID = useAuthStore((state) => state.sessionID);
 
   const loginUser = useAuthStore((state) => state.loginUser);
   const getSessionID = useAuthStore((state) => state.getSessionID);
   const getUserCredentials = useAuthStore((state) => state.getUserCredentials);
+
+  const requestToken = useGetTokens();
+
+  const [prompt, setPrompt] = useState('');
 
   const initialValues = { username: "", password: ""};
 
@@ -32,7 +38,7 @@ const LoginScreen = () => {
             token: requestToken,
         });
         if(isLoginSuccess){
-          getSessionID(requestToken);
+          getSessionID(validatedRequestToken);
           if(isSessionIDGenerated){
             getUserCredentials(sessionID);
             if(isAuthenticated){
@@ -42,7 +48,7 @@ const LoginScreen = () => {
           }
         }
         else{
-          console.log('Login Unsuccessful')
+          setPrompt('Invalid username and password')
         }
     };
   };
@@ -58,9 +64,6 @@ const LoginScreen = () => {
           <LogoHolder>
             <Logo source={AppLogo}/>
           </LogoHolder>
-          {/* <HeaderHolder>
-            <LoginTitle>Login</LoginTitle>
-          </HeaderHolder> */}
           <TextInput 
               inputProps={{
                   placeholder: "Enter Username",
@@ -81,6 +84,7 @@ const LoginScreen = () => {
               isBottomBorder={true}
               color='#58F5D9'
             />
+            <LoginPrompt>{prompt}</LoginPrompt>
             <ButtonContainer>
               <ButtonText text='Log In' buttonColor='#58F5D9' textColor='#15191E' width='60%' textSize='18'
                 onPress={formik.handleSubmit}

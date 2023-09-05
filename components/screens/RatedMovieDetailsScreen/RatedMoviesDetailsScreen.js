@@ -16,12 +16,19 @@ import { ICON_NAMES } from '../../constants/constant';
 
 const RatedMoviesDetailsScreen = ({ navigation, route }) => {
   const { movie } = route.params;
+  
   const sessionID = useAuthStore((state) => state.user.session_id)
   const deleteRating = useRatingStore((state) => state.deleteRating)
-  const movieID = movie.id
-  console.log(movie.id)
 
   const {reviews, loading} = useGetReviews(movie.id)
+
+  const movieID = movie.id
+
+  const movieDate = movie.release_date;
+  const year = movieDate.slice(0,4);
+
+  const movieRating = movie.vote_average;
+  const rating = movieRating.toFixed(1);
 
   const handleDeleteRating = () => {
     deleteRating({
@@ -30,9 +37,6 @@ const RatedMoviesDetailsScreen = ({ navigation, route }) => {
     })
     navigation.navigate('RatedMovies')
   }
-
-  const movieDate = movie.release_date
-  const year = movieDate.slice(0,4);
 
   return (
     <RatedMovieDetailsContainer>
@@ -48,7 +52,14 @@ const RatedMoviesDetailsScreen = ({ navigation, route }) => {
             <RatingsContainer>
               <Ratings>Ratings:</Ratings>
               <RatingsDetailsContainer>
-                <DetailsLabel>{movie.vote_average}</DetailsLabel>
+                <DetailsLabel>{rating}</DetailsLabel>
+                <AntDesign name="star" size={18} color="yellow" />
+              </RatingsDetailsContainer>
+            </RatingsContainer>
+            <RatingsContainer>
+              <Ratings>Your Rating:</Ratings>
+              <RatingsDetailsContainer>
+                <DetailsLabel>{movie.rating}</DetailsLabel>
                 <AntDesign name="star" size={18} color="yellow" />
               </RatingsDetailsContainer>
             </RatingsContainer>

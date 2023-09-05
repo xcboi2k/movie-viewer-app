@@ -19,18 +19,27 @@ import useRatingStore from '../../../stores/useRatingStore';
 
 const MovieDetailsScreen = ({ navigation, route }) => {
     const { movie } = route.params;
+
     const userID = useAuthStore((state) => state.user.user_id)
     const sessionID = useAuthStore((state) => state.user.session_id)
     const addWatchlist = useWatchlistStore((state) => state.addWatchlist)
     const addRating = useRatingStore((state) => state.addRating)
-    const movieID =  movie.id
-
-    console.log(movie.id)
-    console.log(userID)
 
     const {reviews, loading} = useGetReviews(movie.id)
 
+    const movieID =  movie.id
+
+    const movieDate = movie.release_date
+    const year = movieDate.slice(0,4);
+
+    const movieRating = movie.vote_average;
+    const rating = movieRating.toFixed(1);
+
     const [isModalVisible, setIsModalVisible] = useState(false);
+
+    const handleOpenRatingModal = () => {
+        setIsModalVisible(true);
+    };
 
     const handleAddWatchlist = () => {
         addWatchlist({
@@ -48,13 +57,6 @@ const MovieDetailsScreen = ({ navigation, route }) => {
         })
     }
 
-    const handleOpenRatingModal = () => {
-        setIsModalVisible(true);
-    };
-
-    const movieDate = movie.release_date
-    const year = movieDate.slice(0,4);
-
     return (
         <MovieDetailsContainer>
             <ScreenHeader 
@@ -69,7 +71,7 @@ const MovieDetailsScreen = ({ navigation, route }) => {
                         <RatingsContainer>
                             <Ratings>Ratings:</Ratings>
                             <RatingsDetailsContainer>
-                                <DetailsLabel>{movie.vote_average}</DetailsLabel>
+                                <DetailsLabel>{rating}</DetailsLabel>
                                 <AntDesign name="star" size={18} color="yellow" />
                             </RatingsDetailsContainer>
                         </RatingsContainer>

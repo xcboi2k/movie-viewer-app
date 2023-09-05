@@ -4,6 +4,7 @@ const authStore = (set, get) => ({
     user: null, // User object (null if not logged in)
     isAuthenticated: false, // Authentication status,
     isLoginSuccess: false,
+    validatedRequestToken: null,
     isSessionIDGenerated: false,
     sessionID: null,
     setUser: (data) => set({ user: data }),
@@ -25,7 +26,7 @@ const authStore = (set, get) => ({
             };
             const response = await fetch('https://api.themoviedb.org/3/authentication/token/validate_with_login', options)
             const res = await response.json();
-            set({isLoginSuccess: true});
+            set({ validatedRequestToken: res.request_token, isLoginSuccess: true });
         }
         catch(error){
             console.error('Login Error:', error);
