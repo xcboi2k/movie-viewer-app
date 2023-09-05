@@ -12,8 +12,6 @@ const WatchlistScreen = ({navigation}) => {
     const userID = useAuthStore((state) => state.user.user_id)
     const sessionID = useAuthStore((state) => state.user.session_id)
     const {movies, loading} = useGetWatchlist({userID: userID, sessionID: sessionID})
-    console.log('SESSION', sessionID)
-    console.log('USER', userID)
 
     const renderMovieItem = ({ item }) => (
         <MovieItem movie={item} onPress={() => navigation.navigate('MovieDetails', { movie: item })}/>

@@ -32,14 +32,15 @@ export const HeaderHolder = styled.View`
     width: 85%;
 `;
 
-export const LoginTitle = styled.Text`
-  color: #58F5D9;
-  font-size: 34px;
-  font-weight: bold;
-  margin-bottom: 20px;
+export const LoginPrompt = styled.Text`
+  color: white;
+  font-size: 14px;
+  margin-bottom: 10px;
+  text-align: center;
 `;
 
 export const ButtonContainer = styled.View`
     justify-content: center;
     align-items: center;
+    margin-bottom: 20px;
 `;

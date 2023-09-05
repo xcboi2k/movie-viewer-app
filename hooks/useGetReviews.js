@@ -20,11 +20,10 @@ export default function useGetReviews(movieID) {
             }
 
             const data = await response.json();
-            console.log('Data', data)
             setReviews(data.results);
             setLoading(false);
         } catch (error) {
-            console.error('fetchReviewsError:', error);
+            console.log('fetchReviewsError:', error);
             setLoading(false);
         }
         }

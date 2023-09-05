@@ -5,7 +5,6 @@ const apikey="5e2f93d8110c63359f4b34177a78e7e7"
 
 const ratingStore = (set, get) => ({
     addRating: async(ratingCredentials) => {
-        console.log('addRating state: ', ratingCredentials)
         try {
             const options = {
                 method: 'POST',
@@ -21,11 +20,10 @@ const ratingStore = (set, get) => ({
                     Alert.alert('FAILED', 'Failed to add rating.')
                 }
         } catch (error) {
-                console.error('Error adding to watchlist:', error);
+                console.log('Error adding to watchlist:', error);
         }
     },
     deleteRating: async(deleteRatingCredentials) => {
-        console.log('addRating state: ', deleteRatingCredentials)
         try {
             const options = {
                 method: 'DELETE',
@@ -40,7 +38,7 @@ const ratingStore = (set, get) => ({
                     Alert.alert('FAILED', 'Failed to delete rating.')
                 }
         } catch (error) {
-                console.error('Error deleting rating:', error);
+                console.log('Error deleting rating:', error);
         }
     },
 })

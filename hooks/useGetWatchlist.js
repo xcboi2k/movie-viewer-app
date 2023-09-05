@@ -8,8 +8,6 @@ export default function useGetWatchlist({userID, sessionID}) {
 
     useEffect(() => {
         async function fetchWatchlistMovies() {
-            console.log('SESSION', sessionID)
-            console.log('USER', userID)
             try {
                 const options = {
                 method: 'GET',
@@ -28,7 +26,7 @@ export default function useGetWatchlist({userID, sessionID}) {
                 setMovies(data.results);
                 setLoading(false);
             } catch (error) {
-                console.error('fetchWatchlistError:', error);
+                console.log('fetchWatchlistError:', error);
                 setLoading(false);
             }
             }
