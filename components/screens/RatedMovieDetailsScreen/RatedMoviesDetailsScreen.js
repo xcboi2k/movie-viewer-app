@@ -35,7 +35,7 @@ const RatedMoviesDetailsScreen = ({ navigation, route }) => {
       sessionID: sessionID,
       movieID: movieID,
     })
-    navigation.navigate('RatedMovies')
+    navigation.navigate('Home')
   }
 
   return (

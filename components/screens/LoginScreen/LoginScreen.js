@@ -12,11 +12,13 @@ import useAuthStore from '../../../stores/useAuthStore';
 import useGetTokens from '../../../hooks/useGetTokens';
 
 const LoginScreen = () => {
-  const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
-  const isLoginSuccess = useAuthStore((state) => state.isLoginSuccess);
+  const userData = useAuthStore((state) => state.user);
   const validatedRequestToken = useAuthStore((state) => state.validatedRequestToken);
-  const isSessionIDGenerated = useAuthStore((state) => state.isSessionIDGenerated);
   const sessionID = useAuthStore((state) => state.sessionID);
+
+  // const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
+  // const isLoginSuccess = useAuthStore((state) => state.isLoginSuccess);
+  // const isSessionIDGenerated = useAuthStore((state) => state.isSessionIDGenerated);
 
   const loginUser = useAuthStore((state) => state.loginUser);
   const getSessionID = useAuthStore((state) => state.getSessionID);
@@ -37,11 +39,12 @@ const LoginScreen = () => {
             password: values.password,
             token: requestToken,
         });
-        if(isLoginSuccess){
+
+        if(validatedRequestToken != null){
           getSessionID(validatedRequestToken);
-          if(isSessionIDGenerated){
+          if(sessionID != null){
             getUserCredentials(sessionID);
-            if(isAuthenticated){
+            if(userData != null){
               Alert.alert('LOGIN SUCCESSFUL', 'You have successfully logged in your account.')
               resetForm();
             }
