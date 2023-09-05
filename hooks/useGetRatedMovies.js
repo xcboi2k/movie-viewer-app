@@ -22,7 +22,7 @@ export default function useGetRatedMovies({userID, sessionID}) {
                 setMovies(data.results);
                 setLoading(false);
             } catch (error) {
-                console.error('getRatedMovies', error);
+                console.log('getRatedMovies', error);
                 setLoading(false);
             }
         }

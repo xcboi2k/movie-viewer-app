@@ -1,14 +1,17 @@
 import { create } from 'zustand';
+import { Alert } from 'react-native';
 
 const authStore = (set, get) => ({
     user: null, // User object (null if not logged in)
     isAuthenticated: false, // Authentication status,
     isLoginSuccess: false,
-    // validatedRequestToken: null,
-    // isSessionIDGenerated: false,
-    // sessionID: null,
+    prompt: '',
+    isLoading: false,
     setUser: (data) => set({ user: data }),
     loginUser: async(loginCredentials) => {
+        set({
+            isLoading: true, prompt: 'Authenticating user...'
+        });
         console.log('loginUser state: ',loginCredentials)
         try{
             const validateLoginOptions = {
@@ -26,8 +29,8 @@ const authStore = (set, get) => ({
             };
             const response = await fetch('https://api.themoviedb.org/3/authentication/token/validate_with_login', validateLoginOptions)
             const loginResponse = await response.json();
-            // set({ validatedRequestToken: res.request_token, isLoginSuccess: true });
-
+            console.log('loginResponse:', loginResponse.success)
+            console.log(loginResponse)
             if (loginResponse.success === true){
                 try{
                     const generateSessionOptions = {
@@ -41,13 +44,8 @@ const authStore = (set, get) => ({
                     };
                 
                     const response = await fetch(`https://api.themoviedb.org/3/authentication/session/new`, generateSessionOptions);
-
                     const sessionResponse = await response.json();
-                    // set({
-                    //     isSessionIDGenerated: true,
-                    //     sessionID: res.session_id
-                    // });
-                    // console.log('SESSION_ID:',res.session_id);
+                    console.log('sessionResponse:', sessionResponse.success)
 
                     if(sessionResponse.success === true){
                         try{
@@ -62,7 +60,6 @@ const authStore = (set, get) => ({
                             const apiKey = '5e2f93d8110c63359f4b34177a78e7e7';
 
                             const response = await fetch(`https://api.themoviedb.org/3/account?api_key=${apiKey}&session_id=${sessionResponse.session_id}`, getDetailsOptions);
-
                             const userDetailsResponse = await response.json();
 
                             console.log('ACCOUNT_ID:',userDetailsResponse.id);
@@ -75,19 +72,21 @@ const authStore = (set, get) => ({
                             }
 
                             set({
-                                user: initialData, isAuthenticated: true, isLoginSuccess: true
+                                user: initialData, isAuthenticated: true, isLoginSuccess: true, isLoading: true, prompt: 'User Authenticated'
                             });
 
+                            Alert.alert('LOGIN SUCCESSFUL', 'You have successfully logged in your account.')
+
                         }catch(error){
-                            console.error('Fetching User Details Error:', error);
+                            console.log('Fetching User Details Error:', error);
                         }
                     }
                 }catch(error){
-                    console.error('Generate SessionID Error:', error);
+                    console.log('Generate SessionID Error:', error);
                 }
             }
         }catch(error){
-            console.error('Login Error:', error);
+            console.log('Login Error:', error);
         }
     },
 })

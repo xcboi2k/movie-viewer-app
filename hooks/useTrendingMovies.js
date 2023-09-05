@@ -27,7 +27,7 @@ export default function useTrendingMovies() {
                 setMovies(data.results);
                 setLoading(false);
             } catch (error) {
-                console.error('getTrendingMoviesError:', error);
+                console.log('getTrendingMoviesError:', error);
                 setLoading(false);
             }
             }

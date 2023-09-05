@@ -35,7 +35,6 @@ export const HeaderHolder = styled.View`
 export const LoginPrompt = styled.Text`
   color: white;
   font-size: 14px;
-  margin-top: 10px;
   margin-bottom: 10px;
   text-align: center;
 `;
@@ -43,4 +42,5 @@ export const LoginPrompt = styled.Text`
 export const ButtonContainer = styled.View`
     justify-content: center;
     align-items: center;
+    margin-bottom: 20px;
 `;

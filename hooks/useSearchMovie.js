@@ -38,7 +38,7 @@ export default function useSearchMovie(searchQuery) {
             setSearchResults(data.results);
             setSearchLoading(false);
             } catch (error) {
-            console.error('useMovieSearchError:', error);
+            console.log('useMovieSearchError:', error);
             setSearchLoading(false);
             }
         }
