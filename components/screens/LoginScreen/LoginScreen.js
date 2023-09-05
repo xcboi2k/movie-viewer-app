@@ -12,17 +12,17 @@ import useAuthStore from '../../../stores/useAuthStore';
 import useGetTokens from '../../../hooks/useGetTokens';
 
 const LoginScreen = () => {
-  const userData = useAuthStore((state) => state.user);
-  const validatedRequestToken = useAuthStore((state) => state.validatedRequestToken);
-  const sessionID = useAuthStore((state) => state.sessionID);
+  // const userData = useAuthStore((state) => state.user);
+  // const validatedRequestToken = useAuthStore((state) => state.validatedRequestToken);
+  // const sessionID = useAuthStore((state) => state.sessionID);
 
+  const isLoginSuccess = useAuthStore((state) => state.isLoginSuccess);
   // const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
-  // const isLoginSuccess = useAuthStore((state) => state.isLoginSuccess);
   // const isSessionIDGenerated = useAuthStore((state) => state.isSessionIDGenerated);
 
   const loginUser = useAuthStore((state) => state.loginUser);
-  const getSessionID = useAuthStore((state) => state.getSessionID);
-  const getUserCredentials = useAuthStore((state) => state.getUserCredentials);
+  // const getSessionID = useAuthStore((state) => state.getSessionID);
+  // const getUserCredentials = useAuthStore((state) => state.getUserCredentials);
 
   const requestToken = useGetTokens();
 
@@ -40,19 +40,27 @@ const LoginScreen = () => {
             token: requestToken,
         });
 
-        if(validatedRequestToken != null){
-          getSessionID(validatedRequestToken);
-          if(sessionID != null){
-            getUserCredentials(sessionID);
-            if(userData != null){
-              Alert.alert('LOGIN SUCCESSFUL', 'You have successfully logged in your account.')
-              resetForm();
-            }
-          }
+        if(isLoginSuccess === true){
+          Alert.alert('LOGIN SUCCESSFUL', 'You have successfully logged in your account.')
+          resetForm();
         }
         else{
           setPrompt('Invalid username and password')
         }
+
+        // if(validatedRequestToken != null){
+        //   getSessionID(validatedRequestToken);
+        //   if(sessionID != null){
+        //     getUserCredentials(sessionID);
+        //     if(userData != null){
+        //       Alert.alert('LOGIN SUCCESSFUL', 'You have successfully logged in your account.')
+        //       resetForm();
+        //     }
+        //   }
+        // }
+        // else{
+        //   setPrompt('Invalid username and password')
+        // }
     };
   };
 
@@ -69,9 +77,9 @@ const LoginScreen = () => {
           </LogoHolder>
           <TextInput 
               inputProps={{
-                  placeholder: "Enter Username",
-                  onChangeText: formik.handleChange("username"),
-                  value: formik.values.username,
+                placeholder: "Enter Username",
+                onChangeText: formik.handleChange("username"),
+                value: formik.values.username,
               }}
               customLabel="Username:"
               isBottomBorder={true}
